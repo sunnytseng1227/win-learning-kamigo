@@ -12,13 +12,13 @@ class KamigoController < ApplicationController
 
   def webhook
     # 設定回覆訊息
-    message = {
-      type: 'text',
-      text: received_text
-    }
+    #  message = {
+    #    type: 'text',
+    #    text: received_text
+    #  }
 
     # 傳送訊息
-    response = reply_to_line(message)
+    response = reply_to_line(received_text)
 
     # 回應 200
     head :ok
@@ -30,7 +30,40 @@ class KamigoController < ApplicationController
   def received_text
     message = params['events'][0]['message']
     message_type = message['type']
-    message_type
+     case message_type
+        when "text"
+          message = {
+          type: 'text',
+          text:   message['text']
+        }
+        when "image"
+           message = {
+          type: 'text',
+          text:  "是一張圖"
+        }
+        when "audio"
+           message = {
+          type: 'text',
+          text:  "是一個音檔"
+        }
+        when "file"
+           message = {
+          type: 'text',
+          text:  "是一個檔案"
+        }
+        when "location"
+           message = {
+          type: 'text',
+          text:  "是坐標"
+        }
+        else
+          message = {
+          type: 'text',
+          text:  "看嘸啦~"
+        }
+
+      end
+
   end
 
   # 傳送訊息到 line
