@@ -11,11 +11,6 @@ class KamigoController < ApplicationController
   end
 
   def webhook
-    # 設定回覆訊息
-    #  message = {
-    #    type: 'text',
-    #    text: received_text
-    #  }
 
     # 傳送訊息
     response = reply_to_line(received_text)
@@ -41,8 +36,7 @@ class KamigoController < ApplicationController
           type: 'text',
           text:  "是一張圖"
         }
-       when "Sticker"
-
+       when "sticker"
          message = {
           type: 'sticker',
           packageId: '1',
@@ -61,7 +55,7 @@ class KamigoController < ApplicationController
         when "location"
            message = {
           type: 'text',
-          text:  "你好懶喔~~ \n " +message['address'] + '對嗎'
+          text:  "你好懶喔~~ \n 你目前在 \n " +message['address'] + '\n對嗎'
         }
         else
           message = {
