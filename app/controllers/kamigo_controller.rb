@@ -34,18 +34,12 @@ class KamigoController < ApplicationController
         when "text"
           message = {
           type: 'text',
-          text:   message['text']
+          text:   message['text'] + '~'
         }
         when "image"
            message = {
           type: 'text',
           text:  "是一張圖"
-        }
-        when "sticker"
-           message = {
-          type:'sticker',
-          packageId:'1',
-          stickerId:'402'
         }
         when "audio"
            message = {
@@ -56,11 +50,6 @@ class KamigoController < ApplicationController
            message = {
           type: 'text',
           text:  "是一個檔案"
-        }
-        when "location"
-           message = {
-          type: 'text',
-          text:  "喔喔~你在"message['address']."喔~我來看看"
         }
         when "location"
            message = {
