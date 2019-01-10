@@ -55,7 +55,7 @@ class KamigoController < ApplicationController
         when "location"
            message = {
           type: 'text',
-          text:  "你好懶喔~~ 你目前在 \n " +message['address'] + '\n 對嗎？'
+          text:  "你好懶喔~~ 居然不打給我地址！你目前在 \n " +message['address'] + " \n 對嗎？"
         }
         else
           message = {
