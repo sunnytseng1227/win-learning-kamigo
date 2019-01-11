@@ -27,19 +27,10 @@ class KamigoController < ApplicationController
     message_type = message['type']
      case message_type
         when "text"
-          get_text = message['text']
-          case get_text
-            when  "123"
-               message = {
-              type: 'text',
-              text:  "好的 已完成預約~ See You"
-            }
-            when  "456"
-               message = {
-              type: 'text',
-              text:  "好的，要預約時說一聲~"
-            }
-
+           message = {
+          type: 'text',
+          text:  message['text'] + '~'
+        }
         when "image"
            message = {
           type: 'text',
