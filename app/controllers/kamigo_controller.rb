@@ -59,15 +59,36 @@ class KamigoController < ApplicationController
         when "text"
            message_txt = message['text']
             case message_txt
-            when "我有問題"
-                 message = {
-                type: 'text',
-                text:  "什麼問題？？？"
-              }
+            when "我要看兔仔"
+                 {
+                   "type": "template",
+                   "altText": "this is a image carousel template",
+                   "template": {
+                       "type": "image_carousel",
+                       "columns": [
+                           {
+                             "imageUrl": "https://cdn2.ettoday.net/images/3826/d3826516.jpg",
+                             "action": {
+                               "type": "postback",
+                               "label": "Buy",
+                               "data": "action=buy&itemid=111"
+                             }
+                           },
+                           {
+                             "imageUrl": "https://cdn2.ettoday.net/images/3826/c3826788.jpg",
+                             "action": {
+                               "type": "message",
+                               "label": "Yes",
+                               "text": "yes"
+                             }
+                           }
+                       ]
+                   }
+                 }
             else
                  message = {
                 type: 'text',
-                text:  message_txt
+                text:  message_txt + '~'
               }
             end
         when "image"
