@@ -20,29 +20,6 @@ class KamigoController < ApplicationController
 
   end
 
-  # 確認問題
-  def confirm_template(message_obt)
-    message = {
-    "type": "template",
-      "template": {
-          "type": "confirm",
-          "text": message_obt['text'] + '~',
-          "actions": [
-              {
-                "type": "message",
-                "label": "答對了~",
-                "text": "yes"
-              },
-              {
-                "type": "message",
-                "label": "錯瞜",
-                "text": "no"
-              }
-          ]
-      }
-    }
-  end
-
 
   # 取得對方說的話
   def received_text
@@ -63,7 +40,7 @@ class KamigoController < ApplicationController
                     },
                     {
                       "type": "message",
-                      "label": "錯瞜",
+                      "label": "錯了",
                       "text": "no"
                     }
                 ]
