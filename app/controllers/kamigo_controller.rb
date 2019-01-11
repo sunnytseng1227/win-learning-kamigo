@@ -96,7 +96,7 @@ class KamigoController < ApplicationController
                           "thumbnailImageUrl": "https://cdn2.ettoday.net/images/3826/d3826516.jpg",
                           "imageBackgroundColor": "#FFFFFF",
                           "title": "鏟屎",
-                          "text": "description",
+                          "text": "奴才 \n\n\n 清乾淨~",
                           "defaultAction": {
                               "type": "uri",
                               "label": "View detail",
@@ -109,9 +109,9 @@ class KamigoController < ApplicationController
                                   "data": "action=add&itemid=111"
                               },
                               {
-                                  "type": "message",
+                                  "type": "postback",
                                   "label": "我要預約",
-                                  "text": "我要預約"
+                                  "text": "action=booking&itemid=111"
                               }
                           ]
                         },
