@@ -27,13 +27,14 @@ class KamigoController < ApplicationController
     message_type = message['type']
      case message_type
         when "text"
-          case message['text']
-            when  "確定喔！感謝"
+          get_text = message['text']
+          case get_text
+            when  "123"
                message = {
               type: 'text',
               text:  "好的 已幫您完成預約~ See You"
             }
-            when  "讓我想想~我再跟你說~"
+            when  "456"
                message = {
               type: 'text',
               text:  "好的，要預約時說一聲~"
@@ -53,7 +54,7 @@ class KamigoController < ApplicationController
                       },
                       {
                         "type": "message",
-                        "label": "讓我想想！",
+                        "label": "我再想想！",
                         "text": "讓我想想~我再跟你說~"
                       }
                   ]
