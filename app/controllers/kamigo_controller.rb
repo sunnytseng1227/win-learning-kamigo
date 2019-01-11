@@ -66,8 +66,7 @@ class KamigoController < ApplicationController
             type: 'text',
             text:  '那根筋不對~'
           }
-        when "我要預約"
-            directory
+
         else
            message = {
           type: 'text',
