@@ -96,12 +96,7 @@ class KamigoController < ApplicationController
                           "thumbnailImageUrl": "https://cdn2.ettoday.net/images/3826/d3826516.jpg",
                           "imageBackgroundColor": "#FFFFFF",
                           "title": "鏟屎",
-                          "text": "description",
-                          "defaultAction": {
-                              "type": "uri",
-                              "label": "View detail",
-                              "uri": "http://example.com/page/123"
-                          },
+
                           "actions": [
                               {
                                   "type": "message",
