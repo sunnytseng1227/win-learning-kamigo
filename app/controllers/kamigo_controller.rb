@@ -20,6 +20,36 @@ class KamigoController < ApplicationController
 
   end
 
+  def directory
+    message ={
+      "type": "template",
+      "altText": "this is a image carousel template",
+      "template": {
+          "type": "image_carousel",
+          "columns": [
+              {
+                "imageUrl": "https://cdn2.ettoday.net/images/3826/d3826516.jpg",
+                "action": {
+                  "type": "postback",
+                  "label": "Buy",
+                  "data": "action=buy&itemid=111"
+                }
+              },
+              {
+                "imageUrl": "https://cdn2.ettoday.net/images/3826/c3826788.jpg",
+                "action": {
+                  "type": "message",
+                  "label": "Yes",
+                  "text": "yes"
+                }
+              }
+
+          ]
+      }
+    }
+
+  end
+
 
   # 取得對方說的話
   def received_text
@@ -27,6 +57,18 @@ class KamigoController < ApplicationController
     message_type = message['type']
      case message_type
         when "text"
+
+          get_message_text = message['text']
+
+          case get_message_text
+            when "我有問題"
+              message = {
+            type: 'text',
+            text:  '那根筋不對~'
+          }
+        when "我要預約"
+            directory
+        else
            message = {
           type: 'text',
           text:  message['text'] + '~'
