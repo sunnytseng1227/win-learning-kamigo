@@ -96,7 +96,7 @@ class KamigoController < ApplicationController
                           "thumbnailImageUrl": "https://cdn2.ettoday.net/images/3826/d3826516.jpg",
                           "imageBackgroundColor": "#FFFFFF",
                           "title": "鏟屎",
-                          "text": "奴才 \n\n\n 清乾淨~",
+                          "text": "奴才清乾淨~",
                           "defaultAction": {
                               "type": "uri",
                               "label": "View detail",
@@ -131,11 +131,7 @@ class KamigoController < ApplicationController
                                   "label": "Buy",
                                   "data": "action=buy&itemid=222"
                               },
-                              {
-                                  "type": "postback",
-                                  "label": "Add to cart",
-                                  "data": "action=add&itemid=222"
-                              },
+
                               {
                                   "type": "uri",
                                   "label": "View detail",
