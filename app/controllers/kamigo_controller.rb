@@ -20,6 +20,29 @@ class KamigoController < ApplicationController
 
   end
 
+  # 確認問題
+  def confirm_template(message_obt)
+    message = {
+    "type": "template",
+      "template": {
+          "type": "confirm",
+          "text": message_obt['text'] + '~',
+          "actions": [
+              {
+                "type": "message",
+                "label": "答對了~",
+                "text": "yes"
+              },
+              {
+                "type": "message",
+                "label": "錯瞜",
+                "text": "no"
+              }
+          ]
+      }
+    }
+  end
+
 
   # 取得對方說的話
   def received_text
@@ -27,26 +50,25 @@ class KamigoController < ApplicationController
     message_type = message['type']
      case message_type
         when "text"
-         {
-           "type": "template",
-           "altText": "this is a confirm template",
-           "template": {
-               "type": "confirm",
-               "text": "Are you sure?",
-               "actions": [
-                   {
-                     "type": "message",
-                     "label": "Yes",
-                     "text": "yes"
-                   },
-                   {
-                     "type": "message",
-                     "label": "No",
-                     "text": "no"
-                   }
-               ]
-           }
-         }
+          message = {
+          "type": "template",
+            "template": {
+                "type": "confirm",
+                "text": message['text'] + '~',
+                "actions": [
+                    {
+                      "type": "message",
+                      "label": "答對了~",
+                      "text": "yes"
+                    },
+                    {
+                      "type": "message",
+                      "label": "錯瞜",
+                      "text": "no"
+                    }
+                ]
+            }
+          }
         when "image"
            message = {
           type: 'text',
