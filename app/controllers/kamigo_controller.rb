@@ -27,10 +27,26 @@ class KamigoController < ApplicationController
     message_type = message['type']
      case message_type
         when "text"
-          message = {
-          type: 'text',
-          text:   message['text'] + '~'
-        }
+         {
+           "type": "template",
+           "altText": "this is a confirm template",
+           "template": {
+               "type": "confirm",
+               "text": "Are you sure?",
+               "actions": [
+                   {
+                     "type": "message",
+                     "label": "Yes",
+                     "text": "yes"
+                   },
+                   {
+                     "type": "message",
+                     "label": "No",
+                     "text": "no"
+                   }
+               ]
+           }
+         }
         when "image"
            message = {
           type: 'text',
