@@ -35,13 +35,13 @@ class KamigoController < ApplicationController
                 "actions": [
                     {
                       "type": "message",
-                      "label": "答對了~",
-                      "text": "yes"
+                      "label": "yes",
+                      "text": "答對了~"
                     },
                     {
                       "type": "message",
-                      "label": "錯了",
-                      "text": "no"
+                      "label": "no",
+                      "text": "錯了"
                     }
                 ]
             }
