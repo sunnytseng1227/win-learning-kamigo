@@ -32,34 +32,14 @@ class KamigoController < ApplicationController
             when  "123"
                message = {
               type: 'text',
-              text:  "好的 已幫您完成預約~ See You"
+              text:  "好的 已完成預約~ See You"
             }
             when  "456"
                message = {
               type: 'text',
               text:  "好的，要預約時說一聲~"
             }
-          else
-            message = {
-            "type": "template",
-              "altText": "確定要預約嗎？",
-              "template": {
-                  "type": "confirm",
-                  "text": message['text'] + '~',
-                  "actions": [
-                      {
-                        "type": "message",
-                        "label": "確定喔！",
-                        "text": "確定喔！感謝"
-                      },
-                      {
-                        "type": "message",
-                        "label": "我再想想！",
-                        "text": "讓我想想~我再跟你說~"
-                      }
-                  ]
-              }
-            }
+
         when "image"
            message = {
           type: 'text',
