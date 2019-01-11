@@ -124,6 +124,7 @@ class KamigoController < ApplicationController
                           "thumbnailImageUrl": "https://cdn2.ettoday.net/images/3826/c3826788.jpg",
                           "imageBackgroundColor": "#000000",
                           "title": "上飯",
+                          "text": "",
                           "defaultAction": {
                               "type": "uri",
                               "label": "View detail",
