@@ -95,8 +95,8 @@ class KamigoController < ApplicationController
                         {
                           "thumbnailImageUrl": "https://cdn2.ettoday.net/images/3826/d3826516.jpg",
                           "imageBackgroundColor": "#FFFFFF",
-                          "title": "this is menu",
-                          "text": "description",
+                          "title": "鏟屎",
+                          "text": "",
                           "defaultAction": {
                               "type": "uri",
                               "label": "View detail",
@@ -104,9 +104,9 @@ class KamigoController < ApplicationController
                           },
                           "actions": [
                               {
-                                  "type": "postback",
-                                  "label": "Buy",
-                                  "data": "action=buy&itemid=111"
+                                  "type": "message",
+                                  "label": "奴才！動作快",
+                                  "text": "我要預約"
                               },
                               {
                                   "type": "postback",
@@ -123,8 +123,7 @@ class KamigoController < ApplicationController
                         {
                           "thumbnailImageUrl": "https://cdn2.ettoday.net/images/3826/c3826788.jpg",
                           "imageBackgroundColor": "#000000",
-                          "title": "this is menu",
-                          "text": "description",
+                          "title": "上飯",
                           "defaultAction": {
                               "type": "uri",
                               "label": "View detail",
