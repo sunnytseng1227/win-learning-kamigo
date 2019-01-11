@@ -96,7 +96,7 @@ class KamigoController < ApplicationController
                           "thumbnailImageUrl": "https://cdn2.ettoday.net/images/3826/d3826516.jpg",
                           "imageBackgroundColor": "#FFFFFF",
                           "title": "鏟屎",
-                          "text": "奴才清乾淨~",
+                          "text": "description",
                           "defaultAction": {
                               "type": "uri",
                               "label": "View detail",
@@ -105,13 +105,18 @@ class KamigoController < ApplicationController
                           "actions": [
                               {
                                   "type": "postback",
-                                  "label": "想瞭解",
-                                  "data": "action=add&itemid=111"
+                                  "label": "我要預約",
+                                  "data": "action=booking&itemid=111"
                               },
                               {
                                   "type": "postback",
-                                  "label": "我要預約",
-                                  "text": "action=booking&itemid=111"
+                                  "label": "Add to cart",
+                                  "data": "action=add&itemid=111"
+                              },
+                              {
+                                  "type": "uri",
+                                  "label": "View detail",
+                                  "uri": "http://example.com/page/111"
                               }
                           ]
                         },
@@ -128,10 +133,14 @@ class KamigoController < ApplicationController
                           "actions": [
                               {
                                   "type": "postback",
-                                  "label": "Buy",
-                                  "data": "action=buy&itemid=222"
+                                  "label": "我要預約",
+                                  "data": "action=booking&itemid=222"
                               },
-
+                              {
+                                  "type": "postback",
+                                  "label": "Add to cart",
+                                  "data": "action=add&itemid=222"
+                              },
                               {
                                   "type": "uri",
                                   "label": "View detail",
