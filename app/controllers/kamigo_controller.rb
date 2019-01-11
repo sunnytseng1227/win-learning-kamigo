@@ -27,6 +27,15 @@ class KamigoController < ApplicationController
     message_type = message['type']
      case message_type
         when "text"
+          get_usertxt = message['text'];
+
+          when  "已幫您完成預約"
+             message = {
+            type: 'text',
+            text:  "OK"
+          }
+        else
+
           message = {
           "type": "template",
             "altText": "確定要預約嗎？",
@@ -36,13 +45,13 @@ class KamigoController < ApplicationController
                 "actions": [
                     {
                       "type": "message",
-                      "label": "確定",
-                      "text": "好的 ~ 已幫您完成預約"
+                      "label": "確定喔！",
+                      "text": "已幫您完成預約"
                     },
                     {
                       "type": "message",
-                      "label": "讓我想想",
-                      "text": "好唷 ~ 再跟我說"
+                      "label": "讓我想想！",
+                      "text": " ~ 再跟我說"
                     }
                 ]
             }
