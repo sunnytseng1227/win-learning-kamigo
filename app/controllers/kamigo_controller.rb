@@ -29,20 +29,20 @@ class KamigoController < ApplicationController
         when "text"
           message = {
           "type": "template",
-            "altText": "this is a confirm template",
+            "altText": "確定要預約嗎？",
             "template": {
                 "type": "confirm",
                 "text": message['text'] + '~',
                 "actions": [
                     {
                       "type": "message",
-                      "label": "答對",
-                      "text": "賓果~"
+                      "label": "確定",
+                      "text": "好的 ~ 已幫您完成預約"
                     },
                     {
                       "type": "message",
-                      "label": "答錯",
-                      "text": "喔喔~錯了！"
+                      "label": "讓我想想",
+                      "text": "好唷 ~ 再跟我說"
                     }
                 ]
             }
