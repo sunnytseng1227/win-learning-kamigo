@@ -3,12 +3,55 @@ class KamigoController < ApplicationController
   protect_from_forgery with: :null_session
 
   # Line Bot API 物件初始化
-  def line
-    @line ||= Line::Bot::Client.new { |config|
+  def client
+    @client ||= Line::Bot::Client.new { |config|
       config.channel_secret = '4287d0f92b9461dd4f15c8448e496b0b'
       config.channel_token = '13SitYEKLmxGk/MTzMCPFWmh5q3BXeJaxYAfWS/kAp2rHKCc7MieOD1qnuzGcAyyledP+jpkU/gxv7309f5AyPLqdnvzj/AkEWkmd3kXVAXBNowxgjHKl9zNfrlibaIpAD6NgX5rRZB4+cfbd/2M+gdB04t89/1O/w1cDnyilFU='
     }
   end
+
+
+  def linecallback
+    body = request.body.read
+
+        signature = request.env['HTTP_X_LINE_SIGNATURE']
+        unless client.validate_signature(body, signature)
+          error 400 do 'Bad Request' end
+        end
+
+        events = client.parse_events_from(body)
+
+        events.each { |event|
+          case event
+            when Line::Bot::Event::Message
+              case event.type
+                when Line::Bot::Event::MessageType::Text
+                  mes_text(event)
+                when Line::Bot::Event::MessageType::Image
+                  mes_Image(event)
+              end
+            end
+        }
+        # 回應 200
+        head :ok
+  end
+
+  def mes_text(event)
+    message = {
+       type: 'text',
+       text: event.message['text']+ '~'
+    }
+    client.reply_message(event['replyToken'], message)
+  end
+
+  def mes_Image(event)
+    message = {
+       type: 'text',
+       text: event.message['id'] + '是一張圖 ~'
+    }
+    client.reply_message(event['replyToken'], message)
+  end
+
 
   def webhook
 
@@ -20,47 +63,26 @@ class KamigoController < ApplicationController
 
   end
 
-  def directory
-    message ={
-      "type": "template",
-      "altText": "this is a image carousel template",
-      "template": {
-          "type": "image_carousel",
-          "columns": [
-              {
-                "imageUrl": "https://cdn2.ettoday.net/images/3826/d3826516.jpg",
-                "action": {
-                  "type": "postback",
-                  "label": "Buy",
-                  "data": "action=buy&itemid=111"
-                }
-              },
-              {
-                "imageUrl": "https://cdn2.ettoday.net/images/3826/c3826788.jpg",
-                "action": {
-                  "type": "message",
-                  "label": "Yes",
-                  "text": "yes"
-                }
-              }
 
-          ]
-      }
-    }
-
-  end
 
 
   # 取得對方說的話
   def received_text
+
+
+
+
     message = params['events'][0]['message']
     message_type = message['type']
+
+
+
      case message_type
         when "text"
            message_txt = message['text']
             case message_txt
             when "我要看兔仔"
-                 {
+                message =  {
                    "type": "template",
                    "altText": "this is a image carousel template",
                    "template": {
@@ -85,72 +107,44 @@ class KamigoController < ApplicationController
                        ]
                    }
                  }
-            when "有什麼服務"
-              {
+
+
+
+
+            when "我有問題"
+              message = {
                 "type": "template",
-                "altText": "this is a carousel template",
+                "altText": "您有新訊息",
                 "template": {
-                    "type": "carousel",
-                    "columns": [
-                        {
-                          "thumbnailImageUrl": "https://cdn2.ettoday.net/images/3826/d3826516.jpg",
-                          "imageBackgroundColor": "#FFFFFF",
-                          "title": "鏟屎",
-                          "text": "description",
-                          "defaultAction": {
-                              "type": "uri",
-                              "label": "View detail",
-                              "uri": "http://example.com/page/123"
-                          },
-                          "actions": [
-                              {
-                                  "type": "postback",
-                                  "label": "我要預約",
-                                  "data": "action=booking&itemid=111"
-                              },
-                              {
-                                  "type": "postback",
-                                  "label": "Add to cart",
-                                  "data": "action=add&itemid=111"
-                              },
-                              {
-                                  "type": "uri",
-                                  "label": "View detail",
-                                  "uri": "http://example.com/page/111"
-                              }
-                          ]
-                        },
-                        {
-                          "thumbnailImageUrl": "https://cdn2.ettoday.net/images/3826/c3826788.jpg",
-                          "imageBackgroundColor": "#000000",
-                          "title": "上飯",
-                          "text": "description",
-                          "defaultAction": {
-                              "type": "uri",
-                              "label": "View detail",
-                              "uri": "http://example.com/page/222"
-                          },
-                          "actions": [
-                              {
-                                  "type": "postback",
-                                  "label": "我要預約",
-                                  "data": "action=booking&itemid=222"
-                              },
-                              {
-                                  "type": "postback",
-                                  "label": "Add to cart",
-                                  "data": "action=add&itemid=222"
-                              },
-                              {
-                                  "type": "uri",
-                                  "label": "View detail",
-                                  "uri": "http://example.com/page/222"
-                              }
-                          ]
-                        }
-                    ],
-                    "imageAspectRatio": "rectangle",
-                    "imageSize": "cover"
+                  "type": "buttons",
+                  "imageAspectRatio": "square",
+                  "imageSize": "cover",
+                  "thumbnailImageUrl": "https://cdn2.ettoday.net/images/3826/c3826788.jpg",
+                  "imageBackgroundColor": "#ffffff",
+                  "title": "常見問題",
+                  "text": "標題文字",
+                  "defaultAction": {
+                    "type": "message",
+                    "label": "點到圖片或標題",
+                    "text": "0"
+                  },
+                  "actions": [
+                    {
+                      "type": "message",
+                      "label": "有什麼服務",
+                      "text": "有什麼服務"
+                    },
+                    {
+                      "type": "postback",
+                      "label": "我的好友推薦序號",
+                      "data": "myrecommend"
+                    },
+                    {
+                      "type": "message",
+                      "label": "推薦給朋友",
+                      "text": "3"
+                    }
+                  ]
                 }
               }
 
@@ -160,7 +154,9 @@ class KamigoController < ApplicationController
                 text:  message_txt + '~'
               }
             end
-        when "image"
+
+
+      when "image"
            message = {
           type: 'text',
           text:  "是一張圖"
@@ -201,7 +197,7 @@ class KamigoController < ApplicationController
     # 取得 reply token
     reply_token = params['events'][0]['replyToken']
     # 傳送訊息
-    line.reply_message(reply_token, message)
+    client.reply_message(reply_token, message)
   end
 
 
