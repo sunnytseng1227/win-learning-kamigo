@@ -85,7 +85,7 @@ class KamigoController < ApplicationController
   def mes_Audio(event)
     message = {
        type: 'text',
-       text: event.message['id'] + '是一個音檔 ~'
+       text: event.message['id'] + '是一個影音檔 ~'
     }
     client.reply_message(event['replyToken'], message)
   end
