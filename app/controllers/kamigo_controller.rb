@@ -43,13 +43,17 @@ class KamigoController < ApplicationController
             when Line::Bot::Event::Postback
               message = {
                  type: "text",
-                 text: "Postback~"
+                 text: event['postback']['data']
               }
               client.reply_message(event['replyToken'], message)
             end
         }
         # 回應 200
         head :ok
+  end
+
+  def  Postback_action(event)
+
   end
 
   def template_1(event)
