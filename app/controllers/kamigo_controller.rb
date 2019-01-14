@@ -41,11 +41,7 @@ class KamigoController < ApplicationController
                   mes_Unsupport(event)
               end
             when Line::Bot::Event::Postback
-              message = {
-                 type: "text",
-                 text: event['postback']['data']
-              }
-              client.reply_message(event['replyToken'], message)
+              Postback_action(event)
             end
         }
         # 回應 200
@@ -53,7 +49,11 @@ class KamigoController < ApplicationController
   end
 
   def  Postback_action(event)
-
+    postback_type = event['postback']['data']
+    case postback_type
+    when "Call for service"
+      template_service(event)
+    end
   end
 
   def template_1(event)
@@ -68,7 +68,7 @@ class KamigoController < ApplicationController
                  action: {
                    type: "postback",
                    label: "點我",
-                   data: "action=buy&itemid=111"
+                   data: "Call_for_service"
                  }
                },
                {
@@ -82,6 +82,61 @@ class KamigoController < ApplicationController
            ]
        }
      }
+     client.reply_message(event['replyToken'], message)
+  end
+
+  def template_service(event)
+    message =  {
+        type: 'template',
+        altText: '您有新訊息 ~ ',
+        template: {
+          type: 'carousel',
+          columns: [
+            {
+              title: 'hoge',
+              text: 'fuga',
+              actions: [
+                { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
+                { label: 'Send postback', type: 'postback', data: 'hello world' },
+                { label: 'Send message', type: 'message', text: 'This is message' }
+              ]
+            },
+            {
+              title: 'Datetime Picker',
+              text: 'Please select a date, time or datetime',
+              actions: [
+                {
+                  type: 'datetimepicker',
+                  label: "Datetime",
+                  data: 'action=sel',
+                  mode: 'datetime',
+                  initial: '2017-06-18T06:15',
+                  max: '2100-12-31T23:59',
+                  min: '1900-01-01T00:00'
+                },
+                {
+                  type: 'datetimepicker',
+                  label: "Date",
+                  data: 'action=sel&only=date',
+                  mode: 'date',
+                  initial: '2017-06-18',
+                  max: '2100-12-31',
+                  min: '1900-01-01'
+                },
+                {
+                  type: 'datetimepicker',
+                  label: "Time",
+                  data: 'action=sel&only=time',
+                  mode: 'time',
+                  initial: '12:15',
+                  max: '23:00',
+                  min: '10:00'
+                }
+              ]
+            }
+          ]
+        }
+      }
      client.reply_message(event['replyToken'], message)
   end
 
