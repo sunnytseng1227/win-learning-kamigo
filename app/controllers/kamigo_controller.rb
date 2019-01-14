@@ -48,11 +48,11 @@ class KamigoController < ApplicationController
 
   def template_1
     message =  {
-       "type": "template",
-       "altText": "您有新訊息",
-       "template": {
-           "type": "image_carousel",
-           "columns": [
+       type: "template",
+       altText: "您有新訊息 ~ ",
+       template: {
+           type: "image_carousel",
+           columns: [
                {
                  "imageUrl": "https://cdn2.ettoday.net/images/3826/d3826516.jpg",
                  "action": {
