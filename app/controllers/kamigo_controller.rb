@@ -43,7 +43,7 @@ class KamigoController < ApplicationController
             when Line::Bot::Event::Postback
               message = {
                  type: "text",
-                 text: event.postback.["data"]
+                 text: "Postback~"
               }
               client.reply_message(event['replyToken'], message)
             end
