@@ -37,8 +37,7 @@ class KamigoController < ApplicationController
                   mes_Location(event)
                 when Line::Bot::Event::MessageType::Sticker
                   mes_Sticker(event)
-                else
-                  mes_Unsupport(event)
+
               end
             end
         }
