@@ -40,6 +40,12 @@ class KamigoController < ApplicationController
                 else
                   mes_Unsupport(event)
               end
+            when Line::Bot::Event::Postback
+              message = {
+                 type: "text",
+                 text: event.postback.["data"]
+              }
+              client.reply_message(event['replyToken'], message)
             end
         }
         # 回應 200
