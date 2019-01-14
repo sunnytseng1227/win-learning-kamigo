@@ -51,7 +51,7 @@ class KamigoController < ApplicationController
   def  Postback_action(event)
     postback_type = event['postback']['data']
     case postback_type
-    when "Call for service"
+    when "Call_for_service"
       template_service(event)
     end
   end
