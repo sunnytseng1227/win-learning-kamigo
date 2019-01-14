@@ -58,7 +58,7 @@ class KamigoController < ApplicationController
    msgapi_available = event.message['packageId'].to_i <= 4
    messages = [{
      type: 'text',
-     text: "[STICKER]\npackageId: #{event.message['packageId']}\nstickerId: #{event.message['stickerId']}"
+     text: "是一張貼圖 ~"
    }]
    if msgapi_available
      messages.push(
