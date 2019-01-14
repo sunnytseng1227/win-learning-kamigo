@@ -26,13 +26,19 @@ class KamigoController < ApplicationController
             when Line::Bot::Event::Message
               case event.type
                 when Line::Bot::Event::MessageType::Text
-                  mes_text(event)
+                  mes_Text(event)
                 when Line::Bot::Event::MessageType::Image
                   mes_Image(event)
-                when Line::Bot::Event::MessageType::Sticker
-                  mes_Sticker(event)
+                when Line::Bot::Event::MessageType::Audio
+                  mes_Audio(event)
+                when Line::Bot::Event::MessageType::File
+                  mes_File(event)
                 when Line::Bot::Event::MessageType::Location
                   mes_Location(event)
+                when Line::Bot::Event::MessageType::Sticker
+                  mes_Sticker(event)
+                else
+                  mes_Unsupport(event)
               end
             end
         }
@@ -40,7 +46,7 @@ class KamigoController < ApplicationController
         head :ok
   end
 
-  def mes_text(event)
+  def mes_Text(event)
     message = {
        type: 'text',
        text: event.message['text']+ '~'
@@ -73,6 +79,30 @@ class KamigoController < ApplicationController
        latitude: event.message['latitude'],
        longitude: event.message['longitude']
     }
+    client.reply_message(event['replyToken'], message)
+  end
+
+  def mes_Audio(event)
+    message = {
+       type: 'text',
+       text: event.message['id'] + '是一個音檔 ~'
+    }
+    client.reply_message(event['replyToken'], message)
+  end
+
+  def mes_File(event)
+    message = {
+       type: 'text',
+       text: event.message['id'] + '是一個檔案 ~'
+    }
+    client.reply_message(event['replyToken'], message)
+  end
+
+  def mes_Unsupport(event)
+    message = {
+          type: 'text',
+          text:  "哩共蝦咪~"
+        }
     client.reply_message(event['replyToken'], message)
   end
 
