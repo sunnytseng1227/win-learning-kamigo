@@ -46,7 +46,7 @@ class KamigoController < ApplicationController
         head :ok
   end
 
-  def template_1
+  def template_1(event)
     message =  {
        type: "template",
        altText: "您有新訊息 ~ ",
@@ -72,21 +72,23 @@ class KamigoController < ApplicationController
            ]
        }
      }
+     client.reply_message(event['replyToken'], message)
   end
 
   def mes_Text(event)
     message_txt = event.message["text"]
     case message_txt
       when "我要看兔仔"
-        template_1
+        template_1(event)
       else
         message = {
            type: "text",
-           text: message_txt + "~"
+           text: message_txt + "~!!"
         }
+        client.reply_message(event['replyToken'], message)
     end
 
-    client.reply_message(event['replyToken'], message)
+
   end
 
   def mes_Image(event)
