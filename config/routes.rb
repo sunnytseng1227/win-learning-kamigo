@@ -11,4 +11,5 @@ Rails.application.routes.draw do
 
   post '/kamigo/webhook', to: 'kamigo#webhook'
   post '/kamigo/linecallback', to: 'kamigo#linecallback'
+
 end
