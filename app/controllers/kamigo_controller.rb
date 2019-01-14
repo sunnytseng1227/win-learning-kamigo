@@ -89,10 +89,10 @@ class KamigoController < ApplicationController
   def template_more_1(event)
      message = {
               type: "text",
-              text: message_txt + "~!!"
+              text: "~!!"
            }
-           client.reply_message(event['replyToken'], message)
     client.reply_message(event['replyToken'], message)
+
   end
   #服務選單
   def template_service(event)
