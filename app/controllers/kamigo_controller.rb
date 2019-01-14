@@ -29,6 +29,7 @@ class KamigoController < ApplicationController
                   mes_text(event)
                 when Line::Bot::Event::MessageType::Image
                   mes_Image(event)
+                when Line::Bot::Event::MessageType::Sticker
               end
             end
         }
@@ -49,6 +50,23 @@ class KamigoController < ApplicationController
        type: 'text',
        text: event.message['id'] + '是一張圖 ~'
     }
+    client.reply_message(event['replyToken'], message)
+  end
+
+  def mes_Sticker(event)
+   msgapi_available = event.message['packageId'].to_i <= 4
+   messages = [{
+     type: 'text',
+     text: "[STICKER]\npackageId: #{event.message['packageId']}\nstickerId: #{event.message['stickerId']}"
+   }]
+   if msgapi_available
+     messages.push(
+       type: 'sticker',
+       packageId: event.message['packageId'],
+       stickerId: event.message['stickerId']
+     )
+   end
+
     client.reply_message(event['replyToken'], message)
   end
 
