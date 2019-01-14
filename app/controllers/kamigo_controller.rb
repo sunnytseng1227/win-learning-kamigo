@@ -92,11 +92,14 @@ class KamigoController < ApplicationController
         altText: '您有新訊息 ~ ',
         template: {
           type: 'carousel',
+          imageAspectRatio:'square',
+          imageSize:'cover',
           columns: [
             {
               title: '鏟屎',
               text: '快來幫朕鏟屎啊！',
-              imageUrl: "https://dvblobcdnjp.azureedge.net//Content/Upload/DailyArticle/Images/2017-03/2c144528-f992-4104-bb9c-3ed474aa012c_m.jpg",
+              thumbnailImageUrl: "https://dvblobcdnjp.azureedge.net//Content/Upload/DailyArticle/Images/2017-03/2c144528-f992-4104-bb9c-3ed474aa012c_m.jpg",
+              imageBackgroundColor: "#a8e8fb",
               actions: [
                 { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
                 { label: 'Send postback', type: 'postback', data: 'hello world' },
@@ -106,7 +109,8 @@ class KamigoController < ApplicationController
             {
               title: '上飯',
               text: '還不快把罐罐放好放滿！',
-              imageUrl: "https://i.ytimg.com/vi/UbyGmLpqG-U/maxresdefault.jpg",
+              thumbnailImageUrl: "https://i.ytimg.com/vi/UbyGmLpqG-U/maxresdefault.jpg",
+              imageBackgroundColor: "#a8e8fb",
               actions: [
                 {
                   type: 'datetimepicker',
