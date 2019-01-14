@@ -101,26 +101,16 @@ class KamigoController < ApplicationController
               thumbnailImageUrl: "https://dvblobcdnjp.azureedge.net//Content/Upload/DailyArticle/Images/2017-03/2c144528-f992-4104-bb9c-3ed474aa012c_m.jpg",
               imageBackgroundColor: "#a8e8fb",
               actions: [
-                { label: 'Go to line.me', type: 'uri', uri: 'https://line.me' },
-                { label: 'Send postback', type: 'postback', data: 'hello world' },
-                { label: 'Send message', type: 'message', text: 'This is message' }
+                { label: '想要瞭解', type: 'postback', data: 'more_1' },
+                { label: '我要預約', type: 'postback', data: 'booking_1' }
               ]
             },
             {
               title: '上飯',
-              text: '還不快把罐罐放好放滿！',
+              text: '快把罐罐放好放滿！',
               thumbnailImageUrl: "https://i.ytimg.com/vi/UbyGmLpqG-U/maxresdefault.jpg",
               imageBackgroundColor: "#a8e8fb",
               actions: [
-                {
-                  type: 'datetimepicker',
-                  label: "Datetime",
-                  data: 'action=sel',
-                  mode: 'datetime',
-                  initial: '2017-06-18T06:15',
-                  max: '2100-12-31T23:59',
-                  min: '1900-01-01T00:00'
-                },
                 {
                   type: 'datetimepicker',
                   label: "Date",
