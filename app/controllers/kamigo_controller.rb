@@ -54,19 +54,19 @@ class KamigoController < ApplicationController
            type: "image_carousel",
            columns: [
                {
-                 "imageUrl": "https://cdn2.ettoday.net/images/3826/d3826516.jpg",
-                 "action": {
-                   "type": "postback",
-                   "label": "點我",
-                   "data": "action=buy&itemid=111"
+                 imageUrl: "https://cdn2.ettoday.net/images/3826/d3826516.jpg",
+                 action: {
+                   type: "postback",
+                   label: "點我",
+                   data: "action=buy&itemid=111"
                  }
                },
                {
-                 "imageUrl": "https://cdn2.ettoday.net/images/3826/c3826788.jpg",
-                 "action": {
-                   "type": "message",
-                   "label": "Yes",
-                   "text": "yes"
+                 imageUrl: "https://cdn2.ettoday.net/images/3826/c3826788.jpg",
+                 action: {
+                   type: "message",
+                   label: "Yes",
+                   text: "yes"
                  }
                }
            ]
@@ -75,14 +75,14 @@ class KamigoController < ApplicationController
   end
 
   def mes_Text(event)
-    message_txt = event.message['text']
+    message_txt = event.message["text"]
     case message_txt
       when "我要看兔仔"
         template_1
       else
         message = {
-           type: 'text',
-           text: event.message['text']+ '~'
+           type: "text",
+           text: message_txt + "~"
         }
     end
 
