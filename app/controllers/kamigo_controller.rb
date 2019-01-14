@@ -30,6 +30,7 @@ class KamigoController < ApplicationController
                 when Line::Bot::Event::MessageType::Image
                   mes_Image(event)
                 when Line::Bot::Event::MessageType::Sticker
+                  mes_Sticker(event)
               end
             end
         }
