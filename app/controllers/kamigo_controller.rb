@@ -31,6 +31,8 @@ class KamigoController < ApplicationController
                   mes_Image(event)
                 when Line::Bot::Event::MessageType::Sticker
                   mes_Sticker(event)
+                when Line::Bot::Event::MessageType::Location
+                  mes_Location(event)
               end
             end
         }
@@ -55,19 +57,22 @@ class KamigoController < ApplicationController
   end
 
   def mes_Sticker(event)
-   msgapi_available = event.message['packageId'].to_i <= 4
-   messages = [{
-     type: 'text',
-     text: "是一張貼圖 ~"
-   }]
-   if msgapi_available
-     messages.push(
-       type: 'sticker',
-       packageId: event.message['packageId'],
-       stickerId: event.message['stickerId']
-     )
-   end
+    message = {
+          type: 'sticker',
+          packageId: '1',
+          stickerId:'402'
+    }
+    client.reply_message(event['replyToken'], message)
+  end
 
+  def mes_Location(event)
+     message = {
+       type: 'location',
+       title: event.message['title'] || event.message['address'],
+       address: event.message['address'],
+       latitude: event.message['latitude'],
+       longitude: event.message['longitude']
+    }
     client.reply_message(event['replyToken'], message)
   end
 
