@@ -37,7 +37,8 @@ class KamigoController < ApplicationController
                   mes_Location(event)
                 when Line::Bot::Event::MessageType::Sticker
                   mes_Sticker(event)
-
+                else
+                  mes_Unsupport(event)
               end
             end
         }
@@ -45,11 +46,46 @@ class KamigoController < ApplicationController
         head :ok
   end
 
+  def template_1
+    message =  {
+       "type": "template",
+       "altText": "您有新訊息",
+       "template": {
+           "type": "image_carousel",
+           "columns": [
+               {
+                 "imageUrl": "https://cdn2.ettoday.net/images/3826/d3826516.jpg",
+                 "action": {
+                   "type": "postback",
+                   "label": "點我",
+                   "data": "action=buy&itemid=111"
+                 }
+               },
+               {
+                 "imageUrl": "https://cdn2.ettoday.net/images/3826/c3826788.jpg",
+                 "action": {
+                   "type": "message",
+                   "label": "Yes",
+                   "text": "yes"
+                 }
+               }
+           ]
+       }
+     }
+  end
+
   def mes_Text(event)
-    message = {
-       type: 'text',
-       text: event.message['text']+ '~'
-    }
+    message_txt = event.message['text']
+    case message_txt
+      when "我要看兔仔"
+        template_1
+      else
+        message = {
+           type: 'text',
+           text: event.message['text']+ '~'
+        }
+    end
+
     client.reply_message(event['replyToken'], message)
   end
 
